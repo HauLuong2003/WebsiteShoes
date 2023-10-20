@@ -39,7 +39,7 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws Se
        req.setAttribute("ListP", productList);
        req.setAttribute("ListCate", cateList);
        req.getRequestDispatcher("/WEB-INF/view/Home.jsp").forward(req, resp);
-;
+
 
 }
    @Override

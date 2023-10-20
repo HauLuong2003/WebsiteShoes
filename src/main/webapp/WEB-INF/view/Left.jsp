@@ -14,8 +14,5 @@
 
         </ul>
     </div>
-    <div class="card bg-light mb-3">
-        
-    </div>
 </div>
 </html>

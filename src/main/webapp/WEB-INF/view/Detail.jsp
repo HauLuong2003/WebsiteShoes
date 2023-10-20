@@ -6,7 +6,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Detail</title>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -88,6 +88,13 @@
                                                             <option> 1 </option>
                                                             <option> 2 </option>
                                                             <option> 3 </option>
+                                                            <option> 4 </option>
+                                                            <option> 5 </option>
+                                                            <option> 6 </option>
+                                                            <option> 7 </option>
+                                                            <option> 8</option>
+                                                            <option> 9 </option>
+                                                            
                                                         </select>
                                                     </dd>
                                                 </dl>  <!-- item-property .// -->
