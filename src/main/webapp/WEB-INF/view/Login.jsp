@@ -22,8 +22,8 @@
             <form class="form-signin" action="login" method="post">
                 <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
                 <p class="text-danger">${mess}</p>
-                <input name="user"  type="text" id="inputEmail" class="form-control" placeholder="Username" required="" autofocus="">
-                <input name="pass"  type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+                <input name="user"  value ="${username}"type="text" id="inputEmail" class="form-control" placeholder="Username" required="" autofocus="">
+                <input name="pass" value="${password}" type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
 
                 <div class="form-group form-check">
                     <input name="remember" value="1" type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -37,6 +37,8 @@
 
             <form action="signup" method="post" class="form-signup">
                 <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign up</h1>
+                  <p class="text-danger">${mess1}</p>
+              
                 <input name="user" type="text" id="user-name" class="form-control" placeholder="User name" required="" autofocus="">
                 <input name="pass" type="password" id="user-pass" class="form-control" placeholder="Password" required autofocus="">
                 <input name="repass" type="password" id="user-repeatpass" class="form-control" placeholder="Repeat Password" required autofocus="">

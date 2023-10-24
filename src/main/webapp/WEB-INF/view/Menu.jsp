@@ -17,7 +17,7 @@
             <ul class="navbar-nav m-auto">
                 <c:if test="${sessionScope.acc.admin == 1}">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Manager Account</a>
+                        <a class="nav-link" href="managertk">Manager Account</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="manager">Manager Product</a>
@@ -32,7 +32,7 @@
                 <c:if test="${sessionScope.acc != null}">
                    
                       <li class="nav-item">
-                        <a class="nav-link" href="#">Account ${sessionScope.acc.user}</a>
+                        <a class="nav-link" href="">Account ${sessionScope.acc.user}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="logout">Logout</a>
@@ -54,7 +54,7 @@
                         </button>
                     </div>
                 </div>
-                <a class="btn btn-success btn-sm ml-3" href="show">
+                <a class="btn btn-success btn-sm ml-3" href="GioHangServlet">
                     <i class="fa fa-shopping-cart"></i> Cart
                 </a>
             </form>

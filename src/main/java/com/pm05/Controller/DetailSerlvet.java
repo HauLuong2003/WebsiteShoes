@@ -27,10 +27,8 @@ public class DetailSerlvet extends HttpServlet {
      String id = request.getParameter("pid");
      int Id = Integer.parseInt(id);
      DBCrub db = new DBCrub();
-     Connection conn = MySQLConnection.getMySQLConnection();
      Product product = db.getProductByID(Id);
-     List<Category> listcate = db.getAllCategory(conn);
-     MySQLConnection.closeConnection(conn);
+     List<Category> listcate = db.getAllCategory();
      request.setAttribute("detail", product);
      request.setAttribute("ListCate", listcate);
      request.getRequestDispatcher("/WEB-INF/view/Detail.jsp").forward(request, response);

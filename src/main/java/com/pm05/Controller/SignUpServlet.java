@@ -21,23 +21,24 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws Se
 }
 @Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	resp.setContentType("txt/html; charset =UTF-8");
+	resp.setContentType("text/html; charset =UTF-8");
 	String user = req.getParameter("user");
 	String pass = req.getParameter("pass");
 	String re_pass = req.getParameter("repass");
+	DBCrub db = new DBCrub();
 	if(!pass.equals(re_pass)) {
-		resp.sendRedirect("home");
+		req.setAttribute("mess1", "password and repeat password in correct");
+		resp.sendRedirect("login");
 	}
 	else {
-		DBCrub db = new DBCrub();
-		Connection conn = MySQLConnection.getMySQLConnection();
-		Account acc = db.CheckAccountExist(user, conn);
+		Account acc = db.CheckAccountExist(user);
 		if (acc == null) {
-			db.SignUp(user, pass, conn);
-			resp.sendRedirect("home");
+			db.SignUp(user, pass);
+			resp.sendRedirect("login");
 		}
 		else {
-			resp.sendRedirect("/WEB-INF/view/Login.jsp");
+			req.setAttribute("mess1", "username exist");
+			resp.sendRedirect("login");
 		}
 	}
 	}

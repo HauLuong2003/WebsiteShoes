@@ -49,7 +49,16 @@
                                                 <p class="btn btn-danger btn-block">${o.price} $</p>
                                             </div>
                                             <div class="col">
-                                                <a href="#" class="btn btn-success btn-block">Add to cart</a>
+                                             <form action="GioHangServlet" method="post">
+                                                    <input type="hidden" min="1" value="1" name="soluong" />
+                                                    <input type="hidden" value="setCart" name="command"/>
+                                                    <input type="hidden" value="${o.id}" name="id"/>
+                                                    <input type="hidden" value="${o.name}" name="name"/>
+                                                    <input type="hidden" value="${o.image}"  name="image"/>
+                                                    <input type="hidden" value="${o.price}" name="price"/>
+                                                    <input type="submit" value="add to cart" class="btn btn-success btn-block"/>
+                                                </form>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -57,7 +66,7 @@
                             </div>
                         </c:forEach>
                     </div>
-                    <button onclick="loadMore()" class="btn btn-primary">Load more</button>
+                 <!--     <button onclick="loadMore()" class="btn btn-primary">Load more</button>-->
                 </div>
 
             </div>
@@ -65,7 +74,7 @@
 
         <jsp:include page="Footer.jsp"></jsp:include>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script>
+       <!--  <script>
                         function loadMore() {
                             var amount = document.getElementsByClassName("product").length;
                             $.ajax({
@@ -100,5 +109,5 @@
                                 }
                             });
                         }
-        </script>  
+        </script>  --> 
     </body></html>

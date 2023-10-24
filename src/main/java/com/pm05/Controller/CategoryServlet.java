@@ -24,17 +24,14 @@ public class CategoryServlet extends HttpServlet {
 
 @Override
 protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	resp.setContentType("text/html;charset= UTF-8");
+	 resp.setContentType("text/html;charset= UTF-8");
 	//lay category 
 	String cateID = req.getParameter("cid");
      int id = Integer.parseInt(cateID);
-     Connection conn = null;
      DBCrub crub =new DBCrub();
-     conn  = MySQLConnection.getMySQLConnection();   
-     List <Category>cateList =crub.getAllCategory(conn);
-   	 List<Product> list = crub.getProductCateID( id,conn);  
+     List <Category>cateList =crub.getAllCategory();
+   	 List<Product> list = crub.getProductCateID( id);  
     
-     MySQLConnection.closeConnection(conn);
      //set data to jsp
      req.setAttribute("ListP", list);
      req.setAttribute("ListCate", cateList);

@@ -14,14 +14,14 @@ import com.pm05.Model.Product;
 public class DBCrub {
 	 static PreparedStatement ps = null;
 	 static ResultSet rs = null;
-	 public  List<Product> getAllProduct( Connection conn) {
+	 public  List<Product> getAllProduct( ) {
 		    
 	        List<Product> productlist = new ArrayList<>();
 	        String sql = "SELECT * FROM product";
 	   
 	       try {
 	    	   new MySQLConnection();
-			conn = MySQLConnection.getMySQLConnection();//mo ket noi sql
+			Connection conn = MySQLConnection.getMySQLConnection();//mo ket noi sql
 	    	   ps = conn.prepareStatement(sql);
 	    	   rs = ps.executeQuery();
 	    	   while(rs.next()) {
@@ -50,13 +50,13 @@ public class DBCrub {
 	        }
 	       return productlist;
 	 }
-	public  List<Category>getAllCategory(Connection conn){
+	public  List<Category>getAllCategory( ){
 		List<Category>cateList = new ArrayList<>();
 		String sql ="SELECT * FROM category";
 		
 		try {
 			new MySQLConnection();
-			conn = MySQLConnection.getMySQLConnection();
+			Connection conn = MySQLConnection.getMySQLConnection();
 			ps=conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 	    while(rs.next()) {
@@ -82,14 +82,14 @@ public class DBCrub {
 		return cateList;
 		
 	}
-	public List<Product> getProductCateID(int cateID,Connection conn){
+	public List<Product> getProductCateID(int cid){
 		List<Product> listCate = new ArrayList<>();
-		String sql = "SELECT * FROM product where cateID = ?";
+		String sql = "SELECT * FROM product where cid = ?";
 		try {
 			new MySQLConnection();
-		    conn = MySQLConnection.getMySQLConnection(); 
+			Connection   conn = MySQLConnection.getMySQLConnection(); 
 		    ps = conn.prepareStatement(sql);
-		    ps.setInt(1,cateID);
+		    ps.setInt(1,cid);
 		    rs = ps.executeQuery();
 		    while(rs.next()) {
 		    	 int id = rs.getInt("id");
@@ -155,12 +155,12 @@ public class DBCrub {
     	
     }
     // ket noi database lay ten san pham tim kiem
-	public List<Product> getProductByName(String search,Connection conn){
+	public List<Product> getProductByName(String search){
 		List<Product> listName = new ArrayList<>();
 		String sql = "SELECT * FROM product where name like ?";
 		try {
 		   new MySQLConnection();
-		   conn = MySQLConnection.getMySQLConnection();
+		   Connection   conn = MySQLConnection.getMySQLConnection();
 		   ps = conn.prepareStatement(sql);
 		   ps.setString(1, "%"+search+"%");
 		   rs = ps.executeQuery();
@@ -224,20 +224,20 @@ public class DBCrub {
 		}		
     	return acc; 	
     }
-    public void SignUp(String user, String pass, Connection conn)
+    public void SignUp(String user, String pass)
     {
     	
-    	String sql ="INSERT INTO account  values(?,?,1,0)";
+    	String sql ="INSERT INTO account( user,pass,customer,admin)VALUES (?,?,1,0)";
     	try {
-    		conn = MySQLConnection.getMySQLConnection();
+    		Connection conn = MySQLConnection.getMySQLConnection();
     		ps = conn.prepareStatement(sql);
     		ps.setString(1,user);
     		ps.setString(2, pass);
-    	     ps.executeUpdate();
+    	    ps.executeUpdate();
     		
     	}
     	catch(Exception e1) {
-    		
+    		e1.printStackTrace();
     	}finally {
     		try {
     			ps.close();
@@ -248,11 +248,11 @@ public class DBCrub {
     	}
  
 }
-    public Account CheckAccountExist(String user, Connection conn) {
+    public Account CheckAccountExist(String user) {
     	Account acc = null;
     	String sql = "SELECT * FROM  account where user =?";
     	try {
-    		conn = MySQLConnection.getMySQLConnection();
+    		Connection conn = MySQLConnection.getMySQLConnection();
     		ps = conn.prepareStatement(sql);
     		ps.setString(1, "user");
     		rs = ps.executeQuery();
@@ -285,7 +285,7 @@ public class DBCrub {
     }
      public void InsertProduct(String name, String image, String price, 
     		 String title, String description ,String category) {
-    	 String  sql ="INSERT INTO product (name,image,price,title,description,cateID)values(?,?,?,?,?,?)";
+    	 String  sql ="INSERT INTO product (name,image,price,title,description,cid)values(?,?,?,?,?,?)";
     	 try {
     		 new MySQLConnection();
 			Connection conn = MySQLConnection.getMySQLConnection();
@@ -305,7 +305,7 @@ public class DBCrub {
      }
      public void UpdateProduct(String name, String image, String price, 
     		 String title, String description ,String category, String pid) {
-    	 String sql ="UPDATE product SET name = ?, image = ?, price = ?, title = ?, description =?, cateID = ? where id =?";
+    	 String sql ="UPDATE product SET name = ?, image = ?, price = ?, title = ?, description =?, cid = ? where id =?";
     	 
     	 try {
     		 new MySQLConnection();
@@ -324,4 +324,44 @@ public class DBCrub {
     		 e.printStackTrace();
     	 }
      }
+     public List<Account> getAllAccounts(Connection conn){
+ 		List<Account>accountlist = new ArrayList<>();
+ 		String sql = "SELECT * FROM account WHERE customer=1";
+ 		try{
+ 			new MySQLConnection();
+ 			conn = MySQLConnection.getMySQLConnection();
+ 			ps = conn.prepareStatement(sql);
+ 			rs = ps.executeQuery();
+ 			while(rs.next()){
+ 				int id = rs.getInt("idAccount");
+ 				String username = rs.getString("user");
+ 				String password = rs.getString("pass");
+ 				int customer = rs.getInt("customer");
+ 				int admin = rs.getInt("Admin");
+ 				Account acc = new Account(id, username, password, customer, admin);
+ 				accountlist.add(acc);
+ 			}
+ 		}catch(Exception e){
+ 			e.printStackTrace();
+ 		}finally {
+ 			try {
+ 				ps.close();
+ 				rs.close();
+ 			} catch (SQLException e) {
+ 				e.printStackTrace();
+ 			}
+ 		}
+ 		return accountlist;
+ 	}
+     public void DeleteAccount(int id) {
+ 		String sql = "DELETE FROM account where idAccount = ?";
+ 		try {
+ 			Connection conn = MySQLConnection.getMySQLConnection();
+ 			ps = conn.prepareStatement(sql);
+ 			ps.setInt(1, id);
+ 			ps.execute();
+ 		} catch (SQLException e) {
+ 			e.printStackTrace();
+ 		}
+ 	}
 }

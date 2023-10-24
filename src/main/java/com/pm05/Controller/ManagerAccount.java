@@ -4,20 +4,18 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
 
-import com.pm05.Model.Category;
-import com.pm05.Model.Product;
+import com.pm05.Model.Account;
 import com.pm05.Model.ConectionDB.DBCrub;
 import com.pm05.Model.ConectionDB.MySQLConnection;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-@WebServlet("/manager")
-public class ManagerProductServlet extends HttpServlet {
+
+@WebServlet("/managertk")
+public class ManagerAccount extends HttpServlet {
     /**
 	 * 
 	 */
@@ -27,14 +25,13 @@ public class ManagerProductServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("text/html;charset=UTF-8");
 		DBCrub crub = new DBCrub();
-	       List <Category>cateList =null;
-	       List<Product> productList = null;
-	       productList = crub.getAllProduct();
-	       cateList = crub.getAllCategory();
-	       //set data to jsp
-	       req.setAttribute("listP", productList);
-	       req.setAttribute("listCC", cateList);
-            
-		   req.getRequestDispatcher("/WEB-INF/view/ManagerProduct.jsp").forward(req, resp);
+	       Connection conn = null;
+		   List<Account>accountlist = null;
+           conn = MySQLConnection.getMySQLConnection();    
+           accountlist = crub.getAllAccounts(conn);
+	       MySQLConnection.closeConnection(conn);
+	       //set data to jsp   
+           req.setAttribute("listacc", accountlist);
+		   req.getRequestDispatcher("/WEB-INF/view/ManagerAccount.jsp").forward(req, resp);
     }
 }

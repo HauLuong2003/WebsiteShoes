@@ -74,7 +74,7 @@
                         </c:forEach>
                     </tbody>
                 </table>
-                <div class="clearfix">
+                <!--  <div class="clearfix">
                     <div class="hint-text"></div>
                     <ul class="pagination">
                         <li class="page-item disabled"><a href="#">Previous</a></li>
@@ -87,6 +87,7 @@
                     </ul>
                 </div>
             </div>
+            -->
             <a href="home"><button type="button" class="btn btn-primary">Back to home</button></a>
 
         </div>

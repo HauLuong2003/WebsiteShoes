@@ -29,10 +29,8 @@ public class SearchServlet extends HttpServlet {
 		DBCrub db = new DBCrub();
 		
 	    String search = request.getParameter("txt");
-	    Connection conn = MySQLConnection.getMySQLConnection();
-	    List<Product> ListName = db.getProductByName(search,conn);
-	    List<Category> listcate =db.getAllCategory(conn);
-	    MySQLConnection.closeConnection(conn);
+	    List<Product> ListName = db.getProductByName(search);
+	    List<Category> listcate =db.getAllCategory();
 	    request.setAttribute("ListP", ListName);
 	    request.setAttribute("ListCate",listcate );
 	    request.setAttribute("txtS", search);

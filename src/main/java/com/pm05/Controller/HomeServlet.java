@@ -28,13 +28,10 @@ public class HomeServlet extends HttpServlet {
 protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
        resp.setContentType("text/html;charset=UTF-8");
        DBCrub crub = new DBCrub();
-       Connection conn = null;
        List <Category>cateList =null;
        List<Product> productList = null;
-       conn = MySQLConnection.getMySQLConnection();    
-       productList = crub.getAllProduct(conn);
-       cateList = crub.getAllCategory(conn);
-       MySQLConnection.closeConnection(conn);
+       productList = crub.getAllProduct();
+       cateList = crub.getAllCategory();
        //set data to jsp
        req.setAttribute("ListP", productList);
        req.setAttribute("ListCate", cateList);

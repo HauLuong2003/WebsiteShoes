@@ -19,12 +19,11 @@ public class EditProductServlet extends HttpServlet {
  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 List <Category>cateList =null;
-		    Connection   conn = MySQLConnection.getMySQLConnection();  
 		String pid = request.getParameter("pid");
 		int id = Integer.parseInt(pid);
 		DBCrub db = new DBCrub();
 		Product product = db.getProductByID(id );
-		cateList = db.getAllCategory(conn);
+		cateList = db.getAllCategory();
 	    request.setAttribute("listCC", cateList);
 
 		request.setAttribute("detail", product);
